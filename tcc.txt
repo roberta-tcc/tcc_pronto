@@ -1,0 +1,85 @@
+create table usuario (
+  id_usuario int not null auto_increment primary key ,
+  login varchar(80) not null unique,
+  nome varchar(80) not null,
+  senha varchar(50) not null,
+  tipo char(1) not null default 'A'
+);
+
+insert into usuario (login, nome, senha, tipo) values ('roberta', 'Roberta Liberalesso', '123', 'C');
+insert into usuario (login, nome, senha, tipo) values ('adm', 'Administrador', '123', 'A');
+
+
+create table fornecedor(
+  id_fornecedor int not null auto_increment primary key ,
+  nome varchar(100) not null,
+  cidade varchar(100) not null
+);
+
+create table lote (
+  id_lote int not null auto_increment primary key ,
+  data_chegada date not null,
+  quant_chegada varchar(40) not null,
+  peso_chegada decimal(13,2) not null,
+  data_saida date,  
+  quant_saida varchar(40),
+  peso_saida decimal(13,2),
+  situacao char(1) not null,
+  id_fornecedor int not null
+);
+
+ALTER TABLE lote ADD CONSTRAINT fk_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES fornecedor (id_fornecedor) ;
+
+create table doenca(
+  id_doenca int not null auto_increment primary key ,
+  nome_doenca varchar(100) not null,
+  codigo decimal(20) not null
+);
+
+create table morte(
+  id_morte int not null auto_increment primary key ,
+  peso decimal(13,2) not null,
+  data date not null,
+  sexo char(1) not null,
+  id_doenca int not null,
+  id_lote int not null
+);
+
+ALTER TABLE morte ADD CONSTRAINT fk_doenca FOREIGN KEY (id_doenca) REFERENCES doenca (id_doenca) ;
+ALTER TABLE morte ADD CONSTRAINT fk_lote FOREIGN KEY (id_lote) REFERENCES lote (id_lote) ;
+
+create table vacina(
+  id_vacina int not null auto_increment primary key ,
+  nome varchar(100) not null,
+  codigo decimal(20) not null,
+  id_doenca int not null
+);
+
+ALTER TABLE vacina ADD CONSTRAINT fk_doenca FOREIGN KEY (id_doenca) REFERENCES doenca (id_doenca) ;
+
+create table vacinado(
+  id_vacinado int not null auto_increment primary key ,
+  data date not null,
+  dias_uso varchar(30),
+  id_vacina int not null,
+  id_lote int not null
+);
+
+ALTER TABLE vacinado ADD CONSTRAINT fk_vacina FOREIGN KEY (id_vacina) REFERENCES vacina (id_vacina) ;
+ALTER TABLE vacinado ADD CONSTRAINT fk_lote FOREIGN KEY (id_lote) REFERENCES lote (id_lote) ;
+
+create table racao(
+  id_racao int not null auto_increment primary key ,
+  nome varchar(100) not null,
+  codigo decimal(20) not null
+);
+
+create table recebimento_racao(
+  id_recebimento int not null auto_increment primary key ,
+  data date not null,
+  quantidade decimal(13,2) not null,
+  id_racao int not null
+);
+
+ALTER TABLE recebimento_racao ADD CONSTRAINT fk_racao FOREIGN KEY (id_racao) REFERENCES racao (id_racao) 
+

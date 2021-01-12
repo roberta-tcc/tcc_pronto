@@ -1,0 +1,59 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+form{
+ font-size: 16px;
+ margin: 0 auto;
+}
+
+fieldset{
+background: #B0C4DE;
+}
+
+table{
+ width: 100%;
+ border-collapse: collapse;
+}
+
+th, td{
+height: 40px;
+border-bottom: 1px ;
+text-align: center;
+}
+
+tr:nth-child(even) {background-color: #B0C4DE;}
+
+th {
+  background-color: #4169E1;
+  color: black;
+}
+
+input[type=text], input[type=date], input[type=number], input[type=password], select {
+  width: 40%;
+  padding: 10px 10px;
+  margin: 15px 5;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+
+}
+
+input[type=submit] {
+  width: 10%;
+  background-color: #4169E1;
+  color: black;
+  padding: 10px 20px;
+  margin: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #0000CD;
+}
+
+body {font-family: Arial, sans-serif;}
+
